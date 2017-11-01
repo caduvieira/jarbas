@@ -15,7 +15,7 @@ services:
        - tasks
        - postgres
     volumes:
-       - "./contrib/data:/mnt/data"
+       - ./contrib/data:/mnt/data
 
   tasks:
     image: datasciencebr/jarbas-backend

@@ -11,7 +11,7 @@ services:
     expose:
       - "8000"
     volumes:
-      - assets:/code/staticfiles
+      - ./staticfiles:/code/staticfiles
     command: ["gunicorn", "jarbas.wsgi:application", "--reload", "--bind", "0.0.0.0:8000", "--workers", "4"]
 
   tasks:
@@ -23,7 +23,7 @@ services:
   elm:
     command: ["npm", "run", "assets"]
     volumes:
-      - assets:/code/jarbas/frontend/static
+      - ./staticfiles:/code/jarbas/frontend/static
 
   postgres:
     expose:
@@ -39,7 +39,5 @@ services:
     ports:
       - "80:80"
     volumes:
-      - assets:/code/staticfiles
+      - ./staticfiles:/code/staticfiles
 
-volumes:
-  assets:

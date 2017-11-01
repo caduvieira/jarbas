@@ -1,8 +1,5 @@
 FROM node:8.4.0
 
-# npm5 issue with updating itself: https://github.com/npm/npm/issues/18278
-# RUN npm install -g npm@latest
-
 WORKDIR /code
 
 COPY package.json package.json
@@ -17,4 +14,5 @@ RUN ./node_modules/.bin/elm-package install --yes
 
 COPY ./jarbas /code/jarbas
 
+RUN mkdir -p /code/staticfiles
 CMD ["npm", "run", "watch"]
