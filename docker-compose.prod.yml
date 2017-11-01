@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
 
   django:
@@ -6,6 +6,8 @@ services:
       - .env.prod
     environment:
        - DEBUG=False
+       - LETSENCRYPT_HOST=${VIRTUAL_HOST_WEB}
+       - VIRTUAL_HOST=${VIRTUAL_HOST_WEB}
        - CACHE_LOCATION=memcached:11211
        - CACHE_BACKEND=django.core.cache.backends.memcached.MemcachedCache
        - SECURE_PROXY_SSL_HEADER=HTTP_X_FORWARDED_PROTO,https
@@ -46,6 +48,17 @@ services:
       - django
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./staticfiles:/code/staticfiles
+      - "/etc/nginx/vhost.d"
+      - "/usr/share/nginx/html"
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+      - "/etc/nginx/certs"
 
+  letsencrypt-nginx-proxy-companion:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    volumes_from:
+      - "nginx"

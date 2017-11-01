@@ -175,6 +175,11 @@ Copy `contrib/.env.sample` as `.env` in the project's root folder and adjust you
 To get this credentials follow [`python-twitter`
 instructions](https://python-twitter.readthedocs.io/en/latest/getting_started.html#getting-your-application-tokens).
 
+##### Deploy settings
+
+* `LETSENCRYPT_EMAIL` (_str_) Email to be used to generate HTTPS certificates with Let's Encrypt
+* `VIRTUAL_HOST_WEB` (_str_) Domain to be used for the HTTPS certificate (for testing locally you can edit your `/etc/hosts` pointing `127.0.0.1` to `local.jarbas.serenatadeamor.org` for example)
+
 ### Using Docker
 
 There are two combinations in terms of With [Docker](https://docs.docker.com/engine/installation/) and [Docker Compose](https://docs.docker.com/compose/install/)
