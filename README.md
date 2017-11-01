@@ -185,12 +185,14 @@ There are two combinations in terms of With [Docker](https://docs.docker.com/eng
   * restarting the Django on Python files changes
   * rebuilding JS from Elm files on save
   * skipping server cache
+  * it reads `.env` looking for environment variables
 * **Production**: passing a specific configurarion as `docker-compose -f docker-compose.yml -f docker-compose.prod.yml …` will launch a more robust environment with production in mind, among others:
   * `nginx` in front of Django
   * server-side cache with memcached
   * manually generate JS after edits on Elm files
   * manually run `collectstatic` command is static changes
   * manually restarting server on change
+  * it reads `.env.prod` looking for environment variables
 
 That said instructions here keep it simple and runs with the development set up. To swicth always add `-f docker-compose.yml -f docker-compose.prod.yml` after `docker-compose`.
 

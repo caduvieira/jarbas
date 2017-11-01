@@ -3,9 +3,12 @@ services:
 
   django:
     env_file:
-      - .env
+      - .env.prod
     environment:
        - DEBUG=False
+       - CACHE_LOCATION=memcached:11211
+       - CACHE_BACKEND=django.core.cache.backends.memcached.MemcachedCache
+       - SECURE_PROXY_SSL_HEADER=HTTP_X_FORWARDED_PROTO,https
     depends_on:
        - memcached
     expose:
@@ -16,9 +19,14 @@ services:
 
   tasks:
     env_file:
-      - .env
+      - .env.prod
     environment:
        - DEBUG=False
+       - CACHE_LOCATION=memcached:11211
+       - CACHE_BACKEND=django.core.cache.backends.memcached.MemcachedCache
+       - SECURE_PROXY_SSL_HEADER=HTTP_X_FORWARDED_PROTO,https
+    depends_on:
+       - memcached
 
   elm:
     command: ["npm", "run", "assets"]
